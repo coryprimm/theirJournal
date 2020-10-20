@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Your Journal Entries By Entry:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Entry Date</th>
+            </tr>
+                {% for entry in my_entries %}
+                    <tr>
+                        <td><a href="/single/{{entry.id}}">{{entry.title}}</a></td>
+                        <td> <a href="/single/edit/{{entry.id}}">Edit</a> | <a href="/delete/{{entry.id}}">Remove</a>  </td>
+                    </tr>
+                {% endfor %}
+        </thead>
+    </table>
+    <br>
+    <h1> Your Writing Organized by Tag:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Pink</th>
+            </tr>
+            {% for tag in my_tags %}
+                <tr>
+                    <td>{{tag.the_type}}</a></td>
+                </tr>
+            {% endfor %}
+        </thead>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Blue</th>
+            </tr>
+            {% for tag in my_tags %}
+                <tr>
+                    <td>{{tag.the_type}}</a></td> 
+                </tr>
+            {% endfor %}
+        </thead>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Green</th>
+            </tr>
+                {% for tag in my_tags %}
+                    <tr>
+                        <td>{{tag.the_type}}</a></td>
+                    </tr>
+                {% endfor %}
+        </thead>
+    </table>
+
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text Self assign</title>
+    <style>
+    .blue {
+        color:blue;
+    }
+    .pink {
+        color: white;
+    }
+    .yellow{
+       color: yellow;
+    }
+    #rte {
+        width:700px;
+        height:700px;
+        background-color: brown;
+        position: absolute;
+        left: 30px;
+        top: 200px;
+        font-size: 25px;
+    }
+    #storyT {
+        background-color: green;
+        color: white;
+    }
+    #gossipT {
+        background-color: blue;
+        color: white;
+    }
+    #otherT {
+        background-color: pink;
+        color: white;
+    }
+    /* #allTheTacos{
+        background-color: yellow;
+    } */
+    </style>
+</head>
+<body>
+    
+    <h1 class='blue' > A text entry box</h1>
+
+    <button name="storyTag" id="storyT" type="button">Tag as Story</button>
+    <button name="gossipTag" id="gossipT" type="button">Tag as Gossip</button>
+    <button name="otherTag" id="otherT" type="button">Tag as Neither</button>
+    <form action="add_item" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Add Entry">
+        <br><br>
+        <input type ="text" name ="everyThing" id="wholeBurrito">
+        <input type ="text" name ="someThing" id="allTheTacos">
+        <input type ="text" name ="title" id="theTitle">
+        <div id="rte" contenteditable="true">
+        </div>
+    </form>
+
+    <form action="add_tagz_base" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Add Base Tags">
+    </form>
+
+    <!-- <form action="add_tag" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Add Entry">
+        <br><br>
+        <input type ="text" name ="addPink" id="adPink">
+        <input type ="text" name ="addGreen" id="adGreen">
+        <input type ="text" name ="addBlue" id="adBlue">
+    </form> -->
+</body>
+<script>
+
+var flag = 0;
+document.getElementById("gossipT").addEventListener("click", colorTheTextBlue);
+document.getElementById("storyT").addEventListener("click", colorTheTextGreen);
+document.getElementById("otherT").addEventListener("click", colorTheTextPink);
+// document.getElementById("rte").addEventListener("click", copyTextToInp2);
+document.getElementById("rte").addEventListener("click", copyTextToInp);
+document.getElementById("rte").addEventListener("keydown", copyTextToInp);
+// document.getElementById("rte").addEventListener("keydown", copyTextToInp2);
+document.getElementById("gossipT").addEventListener("click", copyTextToInp);
+document.getElementById("storyT").addEventListener("click", copyTextToInp);
+document.getElementById("otherT").addEventListener("click", copyTextToInp);
+
+
+function colorTheTextBlue(){
+    highlight("blue");
+}
+function colorTheTextGreen(){
+    highlight("green");
+}
+function colorTheTextPink(){
+    highlight("pink");
+}
+
+function makeEditableAndHighlight(colour) {
+    var range, sel = window.getSelection();
+    if (sel.rangeCount && sel.getRangeAt) {
+        range = sel.getRangeAt(0);
+    }
+    document.designMode = "on";
+    if (range) {
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+    // Use HiliteColor since some browsers apply BackColor to the whole block
+    if (!document.execCommand("HiliteColor", false, colour)) {
+        document.execCommand("BackColor", false, colour);
+    }
+    document.designMode = "off";
+}
+
+function highlight(colour) {
+    var range, sel;
+    if (window.getSelection) {
+        // IE9 and non-IE
+        try {
+            if (!document.execCommand("BackColor", false, colour)) {
+                makeEditableAndHighlight(colour);
+            }
+        } catch (ex) {
+            makeEditableAndHighlight(colour)
+        }
+    } else if (document.selection && document.selection.createRange) {
+        // IE <= 8 case
+        range = document.selection.createRange();
+        range.execCommand("BackColor", false, colour);
+    }
+}
+function copyTextToInp(){
+    var ele = document.getElementById('rte').innerHTML;
+    wholeBurrito.value = ele;
+}
+
+// function copyTextToInp2(){
+//     var ele = document.getElementById('rte').innerHTML;
+//     allTheTacos.value = ele;
+//     if (ele.firstChild) {
+//         ele = ele.innerHTML;
+//     }
+// }
+// function copyTextToInp2(e){
+//     console.log("UP LATE");
+//     var toWeigh = ` ${e.code}`;
+//     var x = " undefined";
+//     console.log(toWeigh.length);
+//     console.log(x.length);
+//     console.log(toWeigh + "is not undefined");
+//     if (toWeigh == " ShiftLeft"){
+//         flag = 1;
+//     }
+//     if (toWeigh.length == 7 && flag == 0){
+//         console.log(toWeigh);
+//         allTheTacos.value += toWeigh[4].toLowerCase();
+//     }
+//     if (toWeigh.length == 7 && flag == 1){
+//         console.log(toWeigh);
+//         allTheTacos.value += toWeigh[4];
+//         flag = 0;
+//     }
+//     if (toWeigh.length == 6){
+//         console.log(toWeigh);
+//         allTheTacos.value += " ";
+//     }
+
+// }
+
+
+
+
+
+
+</script>
+
+</html>

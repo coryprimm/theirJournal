@@ -15,18 +15,17 @@ def indexTwo(request):
 
 def mainList(request):
     my_entries = WholeEntry.objects.all()
-    print(len(my_entries))
-    print(my_entries[0].entry)
-    print("gasdjfhsghajfghsajdkfgkjhasdgfhjksdkgjfhsa")
-    print("Second entries")
+    
+    
+    
     for i in range (0, len(my_entries)):
-        print(my_entries[i].entry)
+        
     my_tags = TheTag.objects.all()
-    print(len(my_tags))
-    print("Second tags")
+    
+    
     for k in range (0, len(my_tags)):
-        print(my_tags[k].typeOfTag.the_type)
-        print(my_tags[k].content)
+        
+        
     context = {
             "my_entries" : my_entries,
             "my_tags" : my_tags, 
@@ -43,13 +42,13 @@ def add_tagz_base(request):
 def add_item(request):
     if request.method == 'POST':
         if request.POST['everyThing'] == "":
-            messages.error(request, "App is finicky as ever right now, deal with it. Nothing you wanted saved, saved.")
+            messages.error(request, "Nothing you wanted saved, saved.")
             return redirect('/')
     
         theJournal = request.POST['everyThing']
         theUnSpannedJournal = request.POST['someThing']
-        print(theJournal)
-        print("That was your request post")
+        
+        
         soup = BeautifulSoup(theJournal, "lxml")
         wholeEntryUnTagged = WholeEntry.objects.create(entry = request.POST['everyThing'])
         
@@ -72,16 +71,16 @@ def add_item(request):
         for k in range (0, len(soup.findAll('span',{"style":"background-color: blue;"})) ):
             blue.append(soup.findAll('span',{"style":"background-color: blue;"})[k].decode_contents())
 
-        print("WHATTTTT")
-        print(pink[0])
-        print("right before the pink for loop")
+        
+        # 
+        
 
 
         for m in range (0, len(pink) ):
             #create the tag in the DB
-            print("inside the pink")
-            print(pink[m])
-            print("That was pink at m")
+            
+            # 
+            
             pinkCreations.append(TheTag.objects.create(content = pink[m], wholeEntry = wholeEntryUnTagged, typeOfTag = pinkT ))
 
             #connect the tag to the overall Text it came from
@@ -97,14 +96,14 @@ def add_item(request):
             #save all the connections of the particular tag.
             pinkCreations[m].save()
 
-            print("made it through the pink block")
-            print(len(pink))
-            print(len(green))
-            print(len(blue))
             
-        print("right before the green for loop")
+            
+            
+            
+            
+        
         for n in range (0, len(green) ):
-            print("inside the green loop")
+            
                         #create the tag in the DB
             greenCreations.append(TheTag.objects.create(content = green[n], wholeEntry = wholeEntryUnTagged, typeOfTag = greenT ))
 
@@ -121,9 +120,9 @@ def add_item(request):
             #save all the connections of the particular tag.
             greenCreations[n].save()
 
-        print("right before the blue for loop")
+        
         for p in range (0, len(blue) ):
-            print("inside the blue loop")
+            
                         #create the tag in the DB
             blueCreations.append(TheTag.objects.create(content = blue[p], wholeEntry = wholeEntryUnTagged, typeOfTag = blueT ))
 

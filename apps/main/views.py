@@ -18,9 +18,8 @@ def mainList(request):
     
     
     
-    for i in range (0, len(my_entries)):
-        
-    my_tags = TheTag.objects.all()
+    for i in range (0, len(my_entries)): 
+        my_tags = TheTag.objects.all()
     
     
     for k in range (0, len(my_tags)):
@@ -48,7 +47,6 @@ def add_item(request):
         theJournal = request.POST['everyThing']
         theUnSpannedJournal = request.POST['someThing']
         
-        
         soup = BeautifulSoup(theJournal, "lxml")
         wholeEntryUnTagged = WholeEntry.objects.create(entry = request.POST['everyThing'])
         
@@ -71,16 +69,8 @@ def add_item(request):
         for k in range (0, len(soup.findAll('span',{"style":"background-color: blue;"})) ):
             blue.append(soup.findAll('span',{"style":"background-color: blue;"})[k].decode_contents())
 
-        
-        # 
-        
-
-
         for m in range (0, len(pink) ):
             #create the tag in the DB
-            
-            # 
-            
             pinkCreations.append(TheTag.objects.create(content = pink[m], wholeEntry = wholeEntryUnTagged, typeOfTag = pinkT ))
 
             #connect the tag to the overall Text it came from
@@ -95,16 +85,10 @@ def add_item(request):
 
             #save all the connections of the particular tag.
             pinkCreations[m].save()
-
-            
-            
-            
-            
-            
-        
+   
         for n in range (0, len(green) ):
             
-                        #create the tag in the DB
+            #create the tag in the DB
             greenCreations.append(TheTag.objects.create(content = green[n], wholeEntry = wholeEntryUnTagged, typeOfTag = greenT ))
 
             #connect the tag to the overall Text it came from
@@ -123,7 +107,7 @@ def add_item(request):
         
         for p in range (0, len(blue) ):
             
-                        #create the tag in the DB
+            #create the tag in the DB
             blueCreations.append(TheTag.objects.create(content = blue[p], wholeEntry = wholeEntryUnTagged, typeOfTag = blueT ))
 
             #connect the tag to the overall Text it came from

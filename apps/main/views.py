@@ -13,18 +13,14 @@ def index(request):
 def indexTwo(request):
     return render(request, "main/thankYou.html")
 
-def mainList(request):
+def mainList(request):#
     my_entries = WholeEntry.objects.all()
-    
-    
     
     for i in range (0, len(my_entries)): 
         my_tags = TheTag.objects.all()
-    
-    
+       
     for k in range (0, len(my_tags)):
-        
-        
+                
     context = {
             "my_entries" : my_entries,
             "my_tags" : my_tags, 

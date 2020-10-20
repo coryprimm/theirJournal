@@ -19,3 +19,4 @@ urlpatterns = [
     url(r'^', include('apps.main.urls')),	# use your app_name here
     # url(r'^admin/', admin.sites.urls)         # comment out, or just delete
 ]
+#comment
